@@ -104,8 +104,8 @@ function App() {
         </div>
         <div className='result'>
           <div className='query'>
-            SELECT U.NOME, U.ID, C.DATA
-            FROM USUARIO U
+            SELECT DISTINCT U.NOME, U.ID, C.DATA_COMPRA
+            FROM USUARIO AS U    
             <br />
             INNER JOIN COMPRA C
             ON U.ID = C.ID_USUARIO
