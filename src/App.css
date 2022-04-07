@@ -77,11 +77,11 @@ ul {
 
 .question {
   font-size: 0.9rem;
-  width: 90%;
+  min-width: 3%;
   margin: 1rem;
   border-radius: 15px;
   background-color: #ffffff;
-  padding: 1rem 5rem 3rem 5rem;
+  padding: 1rem 2rem 2rem 2rem;
   text-align: justify;
 }
 
@@ -106,10 +106,11 @@ input {
   background-color: black;
   border-radius: 15px;
   text-align: justify;
-  padding: 2rem 8rem;
+  padding: 2rem 1rem;
   text-align: center;
   color: orange;
-  min-width: 45%;
+  min-width: 70%;
+  display: flex;
   margin: 1rem;
 }
 
@@ -125,6 +126,11 @@ input {
 
 .query {
   text-transform: uppercase;
+  text-align: justify;
+  font-size: 0.9em;
+  margin-right: 7rem;
+  margin-left: 3rem;
+  margin-top: 2rem;
   text-align: left;
 }
 

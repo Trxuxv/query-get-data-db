@@ -1,4 +1,4 @@
-
+import picture from './assets/picture.png';
 import React from 'react';
 import './App.css';
 
@@ -10,7 +10,7 @@ function App() {
   var compras = require('./data/data.json').compras;
 
   const mostrar = () => {
-    alert('SELECT U.NOME, U.ID, C.DATA FROM USUARIO U    INNER JOIN COMPRA C ON U.ID = C.ID_USUARIO    INNER JOIN ITEM_COMPRA IC ON C.ID = IC.ID_COMPRA    INNER JOIN PRODUTOS P ON IC.ID_PRODUTO = P.ID    WHERE 3 <= (SELECT COUNT(*) FROM COMPRAS WHERE USUARIOID = U.ID FROM USUARIO)    AND    WHERE COUNT(P.PRECO) <= 30    AND    WHERE P.NOME LIKE "LEITE%" AND    WHERE C.DATA BETWEEN "2021-04-16" AND "2021-04-23"')
+    alert('SELECT DISTINCT U.NOME, U.ID, C.DATA_COMPRA    FROM USUARIO AS U   INNER JOIN COMPRAS AS C ON    U.ID = C.ID_USUARIO    INNER JOIN ITEM_COMPRA AS IC ON    C.ID = IC.ID_COMPRA     INNER JOIN PRODUTO AS P ON    IC.ID_PRODUTO = P.ID    WHERE 3 >= (SELECT COUNT(C.ID_USUARIO) FROM COMPRAS AS C WHERE C.ID_USUARIO = U.ID)    AND P.NOME LIKE "LEITE%"    AND(SELECT COUNT(P.PRECO) FROM PRODUTO AS P) <= 30    AND C.DATA_COMPRA BETWEEN "2021-04-18" AND "2021-04-20"')
   }
 
   return (
@@ -104,27 +104,21 @@ function App() {
         </div>
         <div className='result'>
           <div className='query'>
-            SELECT U.NOME, U.ID, C.DATA
-            FROM USUARIO U
-            <br />
-            INNER JOIN COMPRA C
-            ON U.ID = C.ID_USUARIO
-            <br />
-            INNER JOIN ITEM_COMPRA IC
-            ON C.ID = IC.ID_COMPRA
-            <br />
-            INNER JOIN PRODUTOS P
-            ON IC.ID_PRODUTO = P.ID
-            <br />
-            WHERE 3 {'<='} (SELECT COUNT(*)
-            FROM COMPRAS WHERE USUARIOID = U.ID
-            FROM USUARIO)<br />
-            AND<br />
-            WHERE COUNT(P.PRECO) {'<='} 30<br />
-            AND<br />
-            WHERE P.NOME LIKE 'LEITE%'<br />
-            AND<br />
-            WHERE C.DATA BETWEEN '2021-04-16' AND '2021-04-23'
+            SELECT DISTINCT U.NOME, U.ID, C.DATA_COMPRA <br />
+            FROM USUARIO AS U <br />
+            INNER JOIN COMPRAS AS C ON <br />
+            U.ID = C.ID_USUARIO <br />
+            INNER JOIN ITEM_COMPRA AS IC ON <br />
+            C.ID = IC.ID_COMPRA <br />
+            INNER JOIN PRODUTO AS P ON <br />
+            IC.ID_PRODUTO = P.ID <br />
+            WHERE 3{' >= '}( SELECT COUNT(C.ID_USUARIO) FROM COMPRAS AS C  WHERE C.ID_USUARIO = U.ID ) <br />
+            AND P.NOME LIKE 'leite%' <br />
+            AND  (SELECT COUNT(P.PRECO) FROM PRODUTO AS P) {'<= '}30 <br />
+            AND  C.DATA_COMPRA BETWEEN '2021-04-18' AND '2021-04-20' <br />
+          </div>
+          <div>
+            <img src={picture} alt='image' />
           </div>
         </div>
       </div>
