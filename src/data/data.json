@@ -7,22 +7,22 @@
         },
         {
             "id": "2",
-            "id_usuario": "1",
+            "id_usuario": "2",
             "data_compra": "2021-04-17"
         },
         {
             "id": "3",
-            "id_usuario": "1",
+            "id_usuario": "3",
             "data_compra": "2021-04-17"
         },
         {
             "id": "4",
-            "id_usuario": "1",
+            "id_usuario": "3",
             "data_compra": "2021-04-20"
         },
         {
             "id": "5",
-            "id_usuario": "1",
+            "id_usuario": "5",
             "data_compra": "2021-04-21"
         },
         {
@@ -37,17 +37,17 @@
         },
         {
             "id": "8",
-            "id_usuario": "1",
+            "id_usuario": "2",
             "data_compra": "2021-04-24"
         },
         {
             "id": "9",
-            "id_usuario": "1",
+            "id_usuario": "3",
             "data_compra": "2021-04-25"
         },
         {
             "id": "10",
-            "id_usuario": "1",
+            "id_usuario": "9",
             "data_compra": "2021-04-26"
         }
     ],

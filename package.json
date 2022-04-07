@@ -3,13 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@semantic-ui-react/css-patch": "^1.0.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "date-fns": "^2.28.0",
+    "fomantic-ui": "^2.9.0-beta.274",
     "react": "^18.0.0",
     "react-data-table-component": "^7.4.7",
     "react-dom": "^18.0.0",
     "react-scripts": "5.0.0",
+    "semantic-ui-css": "git+https://github.com/Semantic-Org/Semantic-UI-CSS.git",
+    "semantic-ui-react": "^2.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

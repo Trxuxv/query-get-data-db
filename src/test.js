@@ -2,16 +2,109 @@
 import React from 'react';
 import './App.css';
 
-function App() {
+function Test() {
+
+  const mergeArrays = (arr1 = [], arr2 = []) => {
+    let res = [];
+    res = arr1.map(obj => {
+      const index = arr2.findIndex(el => el["id_usuario"] === obj["id"]);
+      const { id_usuario, id, data_compra } = index !== -1 ? arr2[index] : {};
+      return {
+        ...obj,
+        id,
+        id_usuario,
+        data_compra,
+      };
+    });
+    return res;
+  };
+
+  var showResult = false;
 
   var item_compra = require('./data/data.json').item_compra;
   var produtos = require('./data/data.json').produtos;
   var usuarios = require('./data/data.json').usuario;
   var compras = require('./data/data.json').compras;
+  var produtos_leite = produtos.filter(x => x.nome.includes("Leite"));
+
+  const test = (users, purchase, itens, products) => {
+
+    var users = users.map(function (item) { return item.id })
+    var b = purchase.map(function (item) { return item.id_usuario })
+    var compr = purchase.map(function (item) { return item.id })
+    var c = itens.map(function (item) { return item.id_compra })
+    var d = itens.map(function (item) { return item.id_produto })
+    var e = products.map(function (item) { return item.id })
+
+    if (users.filter(v => b.includes(v))) {
+
+      var users_have_purch = users.filter(v => c.includes(v));
+
+      const count = {};
+
+      users_have_purch.forEach(element => {
+        count[element] = (count[element] || 0) + 1;
+      });
+
+      if (compr.filter(v => c.includes(v)) && users_have_purch.filter(x => x >= 3)) {
+
+        if (d.filter(v => e.includes(v))) {
+
+          var prod = d.filter(v => e.includes(v))
+
+          if (prod === produtos_leite)
+            prod.forEach(element => {
+              count[element] += count[element];
+            });
+
+          return users.filter(x => x.id === users_have_purch)
+        }
+      }
+    }
+  }
+
+  test(usuarios, compras, item_compra, produtos);
 
   const mostrar = () => {
-    alert('SELECT U.NOME, U.ID, C.DATA FROM USUARIO U    INNER JOIN COMPRA C ON U.ID = C.ID_USUARIO    INNER JOIN ITEM_COMPRA IC ON C.ID = IC.ID_COMPRA    INNER JOIN PRODUTOS P ON IC.ID_PRODUTO = P.ID    WHERE 3 <= (SELECT COUNT(*) FROM COMPRAS WHERE USUARIOID = U.ID FROM USUARIO)    AND    WHERE COUNT(P.PRECO) <= 30    AND    WHERE P.NOME LIKE "LEITE%" AND    WHERE C.DATA BETWEEN "2021-04-16" AND "2021-04-23"')
+    showResult = true;
+    alert(showResult)
   }
+
+  function myFunc(array, prop) {
+
+    return array.reduce(function (acc, item) {
+
+      let key = item[prop]
+
+      if (!acc[key]) {
+
+        acc[key] = []
+
+      }
+
+      acc[key].push(item)
+
+      return acc
+
+    }, {})
+
+  }
+
+  const qtde_compras_por_usuario = [];
+
+  compras.forEach((x) => {
+    qtde_compras_por_usuario[x.id_usuario] = (qtde_compras_por_usuario[x.id_usuario] || 0) + 1;
+  });
+
+  // console.log("Contagem de compras por usuario: ", qtde_compras_por_usuario)
+
+  var user_purchase = mergeArrays(usuarios, compras);
+  var purchases = user_purchase.filter(x => x.id !== undefined)
+  let groupedStudent = myFunc(purchases, 'id_usuario')
+
+  // console.log("Usuarios e compras", groupedStudent)
+  // console.log("Produtos que contém 'Leite' no nome", produtos_leite)
+  // console.log("Compras feitas: ", purchases)
 
   return (
     <div className="App">
@@ -125,6 +218,7 @@ function App() {
             WHERE P.NOME LIKE 'LEITE%'<br />
             AND<br />
             WHERE C.DATA BETWEEN '2021-04-16' AND '2021-04-23'
+
           </div>
         </div>
       </div>
@@ -132,4 +226,4 @@ function App() {
   );
 }
 
-export default App;
+export default Test;
